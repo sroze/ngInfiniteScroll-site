@@ -35,4 +35,8 @@
     });
   }
 
+  $('document').on('click', 'a[disabled]', function(e) {
+    e.preventDefault();
+  });
+
 })(jQuery, this);

@@ -40,14 +40,30 @@ button.download-button {
 
 @media only screen and (min-width: 768px) {
   #download-modal {
+    width: 550px;
+    margin-left: -275px;
+
+    a.has-tip, .has-tip:hover {
+      color: white;
+      cursor: inherit;
+      border: none;
+      font-weight: bold;
+    }
+
     .subtext {
       min-height: 50px;
     }
+
     a.button {
       width: 49%;
     }
+
     .github {
       text-align: right;
     }
   }
+}
+
+select.version-select {
+  width: auto;
 }
