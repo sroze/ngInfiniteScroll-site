@@ -38,6 +38,7 @@ app.controller 'DownloadsController', ['$scope', ($scope) ->
 
   $scope.versions = [
     'master'
+    '0.1.0'
   ]
 
   $scope.versions = _($scope.versions).sort (a, b) ->
@@ -57,7 +58,13 @@ app.controller 'DownloadsController', ['$scope', ($scope) ->
   latestStable     = stableVersions[0]
   latestUnstable   = unstableVersions[0]
 
-  $scope.selectedVersion = if latestStable then latestStable else 'master'
+  if latestStable
+    $scope.selectedVersion = latestStable
+  else if latestUnstable
+    $scope.selectedVersion = latestUnstable
+  else
+    $scope.selectedVersion = 'master'
+
   $scope.versionIsStable = versionIsStable
   $scope.versionIsUnstable = versionIsUnstable
 
