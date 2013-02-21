@@ -1,0 +1,51 @@
+---
+title: Demo - Infinite Scrolling for AngularJS
+---
+<div class='row'>
+  <div class='twelve columns'>
+    <h3>Demo</h3>
+    <p>
+      A demo like the one shown here can be constructed easily with the following HTML and JavaScript:
+    </p>
+
+    <pre ng-non-bindable class='panel demo radius'>
+  &lt;div ng-controller='DemoController'>
+    &lt;div infinite-scroll='loadMore()' infinite-scroll-disabled='!enabled' infinite-scroll-distance='2'>
+      &lt;img ng-repeat='image in images' ng-src='http://placehold.it/225x250&text={{image}}'>
+    &lt;/div>
+  &lt;/div></pre>
+
+    <pre ng-non-bindable class='panel demo radius'>
+  app.controller('DemoController', function($scope) {
+    $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
+
+    $scope.loadMore = function() {
+      var last = $scope.images[$scope.images.length - 1];
+      for(var i = 1; i <= 8; i++) {
+        $scope.images.push(last + i);
+      }
+    };
+  });</pre>
+
+    <p>
+      For more details and instructions, please see <a href='documentation.html'>the documentation</a>.
+    </p>
+
+    <hr>
+  </div>
+</div>
+
+<div class='row' ng-controller='DemoController'>
+  <div class='twelve columns'>
+    <button ng-click='enabled = !enabled'>Enable/Disable Infinite Scroll</button>
+    Infinite scrolling is currently:
+    <span ng-show='enabled'>Enabled</span>
+    <span ng-hide='enabled'>Disabled</span>
+
+    <ul infinite-scroll='loadMore()' infinite-scroll-disabled='!enabled' infinite-scroll-distance='2' class='demo-container block-grid four-up'>
+      <li ng-repeat='item in items' class='demo-block'>
+        <div>{{item}}</div>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,4 +1,19 @@
-app = angular.module 'infiniteScrollSite', []
+$ ->
+  addHash = ->
+    location.hash = '#download'
+  removeHash = ->
+    location.hash = ''
+
+  if location.hash == '#download'
+    $("#download-modal").reveal
+      close: removeHash
+
+  $('[data-show-downloads]').click (evt) ->
+    $("#download-modal").reveal
+      open: addHash
+      close: removeHash
+
+app = angular.module 'infiniteScrollSite', ['infinite-scroll']
 
 app.controller 'DownloadsController', ['$scope', ($scope) ->
   versionTuple = (version) ->
@@ -51,4 +66,14 @@ app.controller 'DownloadsController', ['$scope', ($scope) ->
     info += " (latest stable release)" if version == latestStable
     info += " (development head)" if version == 'master'
     info
+]
+
+app.controller 'DemoController', ['$scope', '$timeout', ($scope, $timeout) ->
+  $scope.items = [1..64]
+  $scope.enabled = true
+
+  $scope.loadMore = ->
+    lastNum = $scope.items[$scope.items.length - 1]
+    for num in [1..8]
+      $scope.items.push(lastNum + num)
 ]

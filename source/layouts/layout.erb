@@ -22,15 +22,16 @@
   <div class='contain-to-grid'>
     <nav class='top-bar'>
       <ul>
-        <li class='name'><h1><a href='#'><%= image_tag 'tiny-inverted.png' %> ngInfiniteScroll</a></h1></li>
+        <li class='name'><h1><a href='index.html'><%= image_tag 'tiny-inverted.png' %> ngInfiniteScroll</a></h1></li>
         <li class='toggle-topbar'><a href='#'></a></li>
       </ul>
       <section>
         <ul class='left'>
-          <li><a href='#'>Demos</a></li>
-          <li><a href='#'>Documentation</a></li>
-          <li><a href='#'>FAQ</a></li>
-          <li><a href='#'>About</a></li>
+          <li><a href='#download' data-show-downloads='download-modal'>Download</a></li>
+          <li><a href='demo.html'>Demo</a></li>
+          <li><a href='documentation.html'>Documentation</a></li>
+          <li><a href='faq.html'>FAQ</a></li>
+          <li><a href='about.html'>About</a></li>
         </ul>
         <ul class='right'>
           <li><a href='https://github.com/BinaryMuse/ngInfiniteScroll'>View on GitHub</a></li>
@@ -61,14 +62,83 @@
     </div>
     <div class='eight columns footer'>
       <ul class='inline-list footer-links'>
-        <li><a href='#'>Home</a></li>
-        <li><a href='#'>Demos</a></li>
-        <li><a href='#'>Documentation</a></li>
-        <li><a href='#'>FAQ</a></li>
-        <li><a href='#'>About</a></li>
+        <li><a href='index.html'>Home</a></li>
+        <li><a href='#download' data-show-downloads='download-modal'>Download</a></li>
+        <li><a href='demo.html'>Demo</a></li>
+        <li><a href='documentation.html'>Documentation</a></li>
+        <li><a href='about.html'>About</a></li>
         <li><a href='https://github.com/BinaryMuse/ngInfiniteScroll'>View on GitHub</a></li>
       </ul>
     </div>
+  </div>
+
+  <div id='download-modal' class='reveal-modal medium' ng-controller='DownloadsController'>
+    <a class="close-reveal-modal">&#215;</a>
+
+    <dl class='tabs'>
+      <dd class='active'><a href='#download'>Download Source</a></dd>
+      <dd><a href='#bower'>Install with Bower</a></dd>
+    </dl>
+
+    <ul class='tabs-content'>
+      <li id='bowerTab'>
+        <h1>Install with Bower</h1>
+
+        <div class='row'>
+          <div class='twelve columns' ng-hide="selectedVersion == 'master'">
+            <p>If you use
+            <a href='http://twitter.github.com/bower/'>Bower</a> to manage your
+            client-side packages, you can use it to install ngInfiniteScroll.
+            To install, simply run:
+            </p>
+            <pre>bower install ngInfiniteScroll#{{selectedVersion}}</pre>
+          </div>
+          <div class='twelve columns' ng-show="selectedVersion == 'master'">
+            <p>Bower cannot be used to install ngInfiniteScroll for the development head;
+              please select another version to install with Bower.</p>
+          </div>
+        </div>
+      </li>
+
+      <li class='active' id='downloadTab'>
+        <h1>Download <small> {{selectedVersion}}</small></h1>
+
+        <div class='row'>
+          <div class='six columns'>
+            <h3 class='subheader'>Production</h3>
+            <div ng-hide='selectedVersion == "master"'>
+              <p class='subtext'>Download the finished JavaScript, minified or unminified</p>
+              <a ng-href='/downloads/{{selectedVersion}}.min.js' ng-show='versionIsStable(selectedVersion)' class='button radius'>minified</a>
+              <a ng-show='versionIsUnstable(selectedVersion)' disabled='disabled' class='button radius has-tip tip-bottom'
+                title='Minified sources are not available for unstable releases'>minified</a>
+              <a ng-href='/downloads/{{selectedVersion}}.js' class='button radius secondary'>unminified</a>
+            </div>
+            <div ng-show='selectedVersion == "master"'>
+              <p class='subtext'>Production assets are not available for download for the development head</p>
+            </div>
+          </div>
+
+          <div class='six columns'>
+            <h3 class='subheader'>Development</h3>
+            <p class='subtext'>Download the entire development source for {{selectedVersion}}</p>
+            <a ng-href='https://github.com/BinaryMuse/ngInfiniteScroll/archive/{{selectedVersion}}.tar.gz' class='button radius'>.tar.gz</a>
+            <a ng-href='https://github.com/BinaryMuse/ngInfiniteScroll/archive/{{selectedVersion}}.zip' class='button radius secondary'>.zip</a>
+            <p class='github'>or <a ng-href='https://github.com/BinaryMuse/ngInfiniteScroll/tree/{{selectedVersion}}'>view {{selectedVersion}} on GitHub</a></p>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class='row'>
+      <div class='twelve columns'>
+        <p>
+          Select a different version:
+          <select class='version-select' ng-model='selectedVersion'
+                  ng-options='versionLabel(version) for version in versions'></select>
+        </p>
+      </div>
+    </div>
+
   </div>
 
 </body>
