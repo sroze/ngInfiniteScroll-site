@@ -9,6 +9,7 @@ $ ->
       close: removeHash
 
   $('[data-show-downloads]').click (evt) ->
+    evt.preventDefault()
     $("#download-modal").reveal
       open: addHash
       close: removeHash
