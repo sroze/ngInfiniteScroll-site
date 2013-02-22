@@ -4,6 +4,10 @@ body {
   margin-bottom: 50px;
 }
 
+code {
+  background-color: transparent;
+}
+
 .no-marg-bottom {
   margin-bottom: 0px;
 }
@@ -40,6 +44,10 @@ button.download-button {
     font-size: 60px;
     margin-bottom: 10px;
   }
+}
+
+ul.parameters {
+  margin-left: 20px;
 }
 
 @media only screen and (max-width: 767px) {
