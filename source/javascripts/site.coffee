@@ -39,6 +39,7 @@ app.controller 'DownloadsController', ['$scope', ($scope) ->
   $scope.versions = [
     'master'
     '0.1.0'
+    '0.2.0'
   ]
 
   $scope.versions = _($scope.versions).sort (a, b) ->
