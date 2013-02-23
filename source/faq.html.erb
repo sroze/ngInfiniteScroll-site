@@ -1,0 +1,30 @@
+---
+title: About - Infinite Scrolling for AngularJS
+---
+<div class='row'>
+  <div class='twelve columns'>
+    <h3>FAQ</h3>
+
+    <h4>Who made ngInfiniteScroll</h4>
+    <p>ngInfiniteScroll was developed internally by <a href='https://github.com/BinaryMuse'>Brandon Tilley</a> for use at <a href='http://learni.st/'>Learnist</a> It currently drives functionality on several pages, including the home page.</p>
+
+    <h4>How do I get help?</h4>
+    <p>If you'd like to report an issue, please do so at the <a href='https://github.com/BinaryMuse/ngInfiniteScroll/issues'>GitHub issue tracker</a>.</p>
+
+    <h4>Why is ngInfiniteScroll triggering my expression on every single scroll event?</h4>
+    <p>The infiniteScroll directive uses the height of the element that it's attached to in order to determine how close to the bottom of the window it is. In some cases, the browser can report a height of <code>0</code>, which causes this behavior. Usually, this is due to a container element that only contains floated children. The simplest way to fix this problem is to add a "spacer" element to the bottom of the container (something like <code>&lt;div style='clear: both;'>&lt;/div></code>); see <a href='http://stackoverflow.com/questions/218760/how-do-you-keep-parents-of-floated-elements-from-collapsing'>this StackOverflow question and its associated answers</a> for more details.</p>
+
+    <h4>Why is my performance so poor when using ngInfiniteScroll?</h4>
+    <p>There are a couple of things to check if you're getting poor performance when using the infiniteScroll directive.</p>
+    <p><strong>Ensure that you're not calling your infinite scroll expression too often.</strong> Depending on logic you're performing inside the expression or function that ngInfiniteScroll executes for you, you may need to temporarily disable scroll events from triggering the expression. You can do this using the <code>infinite-scroll-disabled</code> attribute. See the <a href='documentation.html'>documentation</a> for more information, and see the <a href='demo_async.html'>remote data demo</a> to see this technique in action.</p>
+    <p><strong>Ensure you're not repeating the infinite scroll directive.</strong> Most often, you will use the <code>ngRepeat</code> directive inside the infinite scroll directive to achieve the correct results:</p>
+    <pre class='demo panel rounded' ng-non-bindable>&lt;div infinite-scroll='pagerFunction()'>
+  &lt;div ng-repeat='item in items'>{{item}}&lt;/div>
+&lt;/div></pre>
+    <p>A common mistake is to put the ng-repeat on the infinite scroll element itself:</p>
+    <pre ng-non-bindable class='demo panel rounded'>&lt;div infinite-scroll='pagerFunction()' ng-repeat='item in items'>
+  {{item}}
+&lt;/div></pre>
+    <p>This is incorrect and will generally result in your browser being very unhappy.</p>
+  </div>
+</div>
