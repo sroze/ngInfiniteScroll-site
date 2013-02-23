@@ -77,7 +77,7 @@ app.controller 'DownloadsController', ['$scope', ($scope) ->
     info
 ]
 
-app.controller 'DemoController', ['$scope', '$timeout', ($scope, $timeout) ->
+app.controller 'BasicDemoController', ['$scope', ($scope) ->
   $scope.items = [1..64]
   $scope.enabled = true
 
@@ -85,4 +85,25 @@ app.controller 'DemoController', ['$scope', '$timeout', ($scope, $timeout) ->
     lastNum = $scope.items[$scope.items.length - 1]
     for num in [1..8]
       $scope.items.push(lastNum + num)
+]
+
+app.controller 'RemoteDemoController', ['$scope', '$http', ($scope, $http) ->
+  $scope.items = []
+  $scope.busy = false
+  $scope.disabled = false
+  $scope.after = ''
+
+  $scope.nextPage = ->
+    return if $scope.busy || $scope.disabled
+    $scope.busy = true
+    url = "http://api.reddit.com/hot?after=#{$scope.after}&jsonp=JSON_CALLBACK"
+    $http.jsonp(url)
+      .success (data) ->
+        items = data.data.children
+        for item in items
+          $scope.items.push(item.data)
+        $scope.after = "t3_#{$scope.items[$scope.items.length - 1].id}"
+        $scope.busy = false
+
+        $scope.disabled = true if $scope.items.length >= 1000
 ]

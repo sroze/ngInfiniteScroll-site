@@ -4,6 +4,10 @@ body {
   margin-bottom: 50px;
 }
 
+ul {
+  margin-left: 20px;
+}
+
 code {
   background-color: transparent;
 }
@@ -26,28 +30,59 @@ button.download-button {
   }
 }
 
-.demo-container {
-  text-align: center;
-}
-
 .panel.demo {
   padding: 10px;
+  overflow-x: auto;
 }
 
-.demo-block {
-  div {
-    background-color: gray;
-    color: white;
-    // width: 225px;
-    height: 150px;
-    line-height: 150px;
-    font-size: 60px;
-    margin-bottom: 10px;
+.demo-basic {
+  text-align: center;
+
+  .demo-block {
+    div {
+      background-color: gray;
+      color: white;
+      // width: 225px;
+      height: 150px;
+      line-height: 150px;
+      font-size: 60px;
+      margin-bottom: 10px;
+    }
   }
 }
 
-ul.parameters {
-  margin-left: 20px;
+.demo-remote {
+  .item {
+    padding-bottom: 10px;
+  }
+
+  .score {
+    float: left;
+    font-size: 30px;
+    font-weight: bold;
+    padding-right: 10px;
+    width: 100px;
+    text-align: right;
+    color: #666;
+  }
+
+  .title {
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    margin-left: 100px;
+  }
+
+  small {
+    display: block;
+    font-size: 85%;
+    margin-left: 100px;
+    padding-top: 3px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
 }
 
 @media only screen and (max-width: 767px) {
