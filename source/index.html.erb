@@ -55,7 +55,7 @@ title: Infinite Scrolling for AngularJS
     <p>Using ngInfiniteScroll is easy&mdash;just follow these simple steps:</p>
     <ol>
       <li>
-        <p class='no-marg-bottom'>
+        <p>
           Include the <a href='#download' data-show-downloads='download-modal'>ngInfiniteScroll JavaScript source</a>
           on your page.
         </p>
@@ -69,8 +69,8 @@ title: Infinite Scrolling for AngularJS
         </p>
         <p><code>angular.module('myApplication', ['infinite-scroll']);</code></p>
         <p>
-          Note that the module name does not include <code>ng</code>, as that namespace is used
-          by the official Angular module.
+          <em>Note that the module name does not include <code>ng</code>, as that namespace is used
+          by the official Angular module.</em>
         </p>
       </li>
 
@@ -80,11 +80,17 @@ title: Infinite Scrolling for AngularJS
         </p>
         <p><code>&lt;div infinite-scroll="myPagingFunction()" infinite-scroll-distance="3"&gt;&lt;/div&gt;</code></p>
         <p>
-          Note that the attribute does not include <code>ng</code>, as that namespace is used
-          by the official Angular module.
+          <em>Note that the attribute does not include <code>ng</code>, as that namespace is used
+          by the official Angular module.</em>
         </p>
+      </li>
+
+      <li>
         <p>
-          See the <a href='documentation.html'>API documentation</a> for more information about what attributes are available for use.
+          That's it! ngInfiniteScroll will call <code>myPagingFunction()</code> any time the bottom of the element
+          approaches the bottom of the browser window. See the <a href='documentation.html'>API documentation</a>
+          for more information about what attributes are available for use, and take a look at
+          <a href='demos.html'>the demos</a> to see ngInfiniteScroll in action.</p>
         </p>
       </li>
   </div>
