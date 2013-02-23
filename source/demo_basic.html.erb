@@ -9,14 +9,18 @@ title: Demo - Basic - Infinite Scrolling for AngularJS
       This basic demo implements an infinite scroller that simply appends elements to an array. The elements are rendered to the page with <code>ngRepeat</code>.
     </p>
 
-    <pre ng-non-bindable class='panel demo radius'>
-&lt;div ng-app='myApp' ng-controller='DemoController'>
-  &lt;div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
-    &lt;img ng-repeat='image in images' ng-src='http://placehold.it/225x250&text={{image}}'>
-  &lt;/div>
-&lt;/div></pre>
+<div ng-non-bindable>
+<% code 'html' do %>
+<div ng-app='myApp' ng-controller='DemoController'>
+  <div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
+    <img ng-repeat='image in images' ng-src='http://placehold.it/225x250&text={{image}}'>
+  </div>
+</div>
+<% end %>
+</div>
 
-    <pre ng-non-bindable class='panel demo radius'>
+<div ng-non-bindable>
+<% code 'javascript' do %>
 var myApp = angular.module('myApp', ['infinite-scroll']);
 myApp.controller('DemoController', function($scope) {
   $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -27,7 +31,9 @@ myApp.controller('DemoController', function($scope) {
       $scope.images.push(last + i);
     }
   };
-});</pre>
+});
+<% end %>
+</div>
 
     <p>
       For more details and instructions, please see <a href='documentation.html'>the documentation</a>.

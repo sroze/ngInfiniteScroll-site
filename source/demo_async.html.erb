@@ -12,24 +12,28 @@ title: Demo - Loading Remote Data - Infinite Scrolling for AngularJS
       <strong>Important Note:</strong> This demo hits the Reddit API, and if you're familiar with Reddit, you know that I cannot guarantee that all the items and outbound links are safe for work. <strong>You have been warned!</strong>
     </p>
 
-    <pre ng-non-bindable class='panel demo radius'>
-&lt;div ng-app='myApp' ng-controller='DemoController'>
-  &lt;div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1'>
-    &lt;div ng-repeat='item in items'>
-      &lt;span class='score'>{{item.score}}&lt;/span>
-      &lt;span class='title'>
-        &lt;a ng-href='{{item.url}}' target='_blank'>{{item.title}}&lt;/a>
-      &lt;/span>
-      &lt;small>by {{item.author}} -
-        &lt;a ng-href='http://reddit.com{{item.permalink}}' target='_blank'>{{item.num_comments}} comments&lt;/a>
-      &lt;/small>
-      &lt;div style='clear: both;'>&lt;/div>
-    &lt;/div>
-    &lt;div ng-show='busy'>Loading data...&lt;/div>
-  &lt;/div>
-&lt;/div></pre>
+<div ng-non-bindable>
+<% code 'html' do %>
+<div ng-app='myApp' ng-controller='DemoController'>
+  <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1'>
+    <div ng-repeat='item in items'>
+      <span class='score'>{{item.score}}</span>
+      <span class='title'>
+        <a ng-href='{{item.url}}' target='_blank'>{{item.title}}</a>
+      </span>
+      <small>by {{item.author}} -
+        <a ng-href='http://reddit.com{{item.permalink}}' target='_blank'>{{item.num_comments}} comments</a>
+      </small>
+      <div style='clear: both;'></div>
+    </div>
+    <div ng-show='busy'>Loading data...</div>
+  </div>
+</div>
+<% end %>
+</div>
 
-    <pre ng-non-bindable class='panel demo radius'>
+<div ng-non-bindable>
+<% code 'javascript' do %>
 var myApp = angular.module('myApp', ['infinite-scroll']);
 myApp.controller('DemoController', function($scope, $http) {
   $scope.items = [];
@@ -50,7 +54,9 @@ myApp.controller('DemoController', function($scope, $http) {
       $scope.busy = false;
     });
   };
-});</pre>
+});
+<% end %>
+</div>
 
     <p>
       For more details and instructions, please see <a href='documentation.html'>the documentation</a>.
