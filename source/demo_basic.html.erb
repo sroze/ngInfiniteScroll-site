@@ -10,14 +10,15 @@ title: Demo - Basic - Infinite Scrolling for AngularJS
     </p>
 
     <pre ng-non-bindable class='panel demo radius'>
-&lt;div ng-controller='DemoController'>
+&lt;div ng-app='myApp' ng-controller='DemoController'>
   &lt;div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
     &lt;img ng-repeat='image in images' ng-src='http://placehold.it/225x250&text={{image}}'>
   &lt;/div>
 &lt;/div></pre>
 
     <pre ng-non-bindable class='panel demo radius'>
-app.controller('DemoController', function($scope) {
+var myApp = angular.module('myApp', ['infinite-scroll']);
+myApp.controller('DemoController', function($scope) {
   $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
 
   $scope.loadMore = function() {
