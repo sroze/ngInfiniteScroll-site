@@ -88,23 +88,34 @@ app.controller 'BasicDemoController', ['$scope', ($scope) ->
       $scope.items.push(lastNum + num)
 ]
 
-app.controller 'RemoteDemoController', ['$scope', '$http', ($scope, $http) ->
-  $scope.items = []
-  $scope.busy = false
-  $scope.disabled = false
-  $scope.after = ''
+app.factory 'Reddit', ['$http', ($http) ->
+  class Reddit
+    constructor: ->
+      @items = []
+      @busy = false
+      @after = ''
+
+    nextPage: =>
+      return if @busy
+      @busy = true
+
+      url = "http://api.reddit.com/hot?after=#{@after}&jsonp=JSON_CALLBACK"
+      $http.jsonp(url)
+        .success (data) =>
+          items = data.data.children
+          for item in items
+            @items.push(item.data)
+          @after = "t3_#{@items[@items.length - 1].id}"
+          @busy = false
+]
+
+app.controller 'RemoteDemoController', ['$scope', 'Reddit', ($scope, Reddit) ->
+  reddit = $scope.reddit = new Reddit()
 
   $scope.nextPage = ->
-    return if $scope.busy || $scope.disabled
-    $scope.busy = true
-    url = "http://api.reddit.com/hot?after=#{$scope.after}&jsonp=JSON_CALLBACK"
-    $http.jsonp(url)
-      .success (data) ->
-        items = data.data.children
-        for item in items
-          $scope.items.push(item.data)
-        $scope.after = "t3_#{$scope.items[$scope.items.length - 1].id}"
-        $scope.busy = false
+    return if $scope.paused()
+    reddit.nextPage()
 
-        $scope.disabled = true if $scope.items.length >= 1000
+  $scope.paused = ->
+    reddit.busy || reddit.items.length >= 1000
 ]
