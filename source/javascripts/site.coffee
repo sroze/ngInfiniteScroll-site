@@ -99,7 +99,7 @@ app.factory 'Reddit', ['$http', ($http) ->
       return if @busy
       @busy = true
 
-      url = "http://api.reddit.com/hot?after=#{@after}&jsonp=JSON_CALLBACK"
+      url = "https://api.reddit.com/hot?after=#{@after}&jsonp=JSON_CALLBACK"
       $http.jsonp(url)
         .success (data) =>
           items = data.data.children
